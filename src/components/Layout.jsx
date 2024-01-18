@@ -5,6 +5,7 @@ import logo from "../images/logo.png"
 import Header from "./Header"
 import Main from  "./Main"
 import PostList from "./PostList"
+import F
 export default function Layout() {
 
     return (
@@ -14,6 +15,7 @@ export default function Layout() {
                 <Header />
                 <Main />
                 <PostList/>
+
             </div>
         </>
 
