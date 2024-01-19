@@ -7,7 +7,7 @@ export default function Routess(){
      <Routes>
        <Route  path="/"  element={<Layout/>}  />
        {/* <Route path="/postDetail/:id" element={<PostDetail/>}  /> */}
-       <Route path="/postDetail" element={<PostDetail/>}  />
+       <Route path="/postDetail/:id" element={<PostDetail/>}  />
 
 
      </Routes>

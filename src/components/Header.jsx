@@ -9,29 +9,29 @@ export default function Header() {
             <nav className="navbar">
                 <div className="left">
                     <img className="logo" src={logo} alt="logo here" />
-                    <Link className="zleft-link" to={"*"}>work
-                    <i className="nf nf-fa-lock"></i>
-                     </Link>
-                    <Link className="left-link" to={"*"}>services 
-                    <i className="nf nf-md-cup"></i>
-                    
+                    <Link className="left-link" to={"*"}>work
+                        <i className="nf nf-fa-lock"></i>
                     </Link>
-                    <Link  className="left-link" to={"*"}>about 
-                    <i className="nf nf-md-heart"></i>
+                    <Link className="left-link" to={"*"}>services
+                        <i className="nf nf-md-cup"></i>
 
                     </Link>
-                 
+                    <Link className="left-link" to={"*"}>about
+                        <i className="nf nf-md-heart"></i>
+
+                    </Link>
+
                 </div>
                 <div className="right">
 
                     <Link className="right-link" to={"*"}>blog
-                    <i className="nf  nf-md-message mts"></i>
-                     </Link>
+                        <i className="nf  nf-md-message mts"></i>
+                    </Link>
                     <Link className="right-link" to={"*"}>planer
-                    <i className="nf  nf-md-leaf mts"></i>
+                        <i className="nf  nf-md-leaf mts"></i>
 
-                     </Link>
-                 
+                    </Link>
+
 
                 </div>
 

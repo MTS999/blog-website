@@ -1,11 +1,9 @@
 
-import postData from "../data"
-import { Link } from "react-router-dom"
-import logo from "../images/logo.png"
+
 import Header from "./Header"
-import Main from  "./Main"
+import Main from "./Main"
 import PostList from "./PostList"
-import F
+import Footer from "./Footer"
 export default function Layout() {
 
     return (
@@ -14,8 +12,8 @@ export default function Layout() {
 
                 <Header />
                 <Main />
-                <PostList/>
-
+                <PostList />
+                <Footer />
             </div>
         </>
 

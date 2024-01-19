@@ -1,12 +1,14 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
     margin: 0;
     padding: 0;
 }
-
+body{
+    font-family: 'Roboto', sans-serif;
+}
 .layout {
     padding: 45px 45px;
 }
@@ -49,7 +51,7 @@ a {
     color: #576B71;
     font-weight: bold;
     font-size: 20px;
-    margin-right: 15px;
+    margin-right: 30px;
 }
 
 .right-link {
@@ -114,10 +116,20 @@ a {
     align-items: start;
     padding: 100px 300px;
 }
-
+.contant{
+    /* background-color: #a3b593; */
+    margin: 10px;
+    border-radius: 4px;
+    padding: 6px 16px;
+    padding-bottom: 25px;
+    transition: all ease .3s;
+}
 .title-link {
     text-decoration: none;
     color: #2B2B2B;
+}
+.contant:hover{
+    background-color: #d29e9e;
 }
 
 .post-title {
@@ -129,6 +141,7 @@ a {
 
 }
 
+
 .post-detail {
     color: #576B71;
     font-size: 20px;
@@ -136,3 +149,77 @@ a {
 
 
 }
+
+.detail-section{
+    /* display: flex; */
+    flex-direction: column;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.head{
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 60px;
+}
+.btn{
+    padding: 10px 20px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.title{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3rem;
+}
+
+.detail{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+
+   /* footer */
+
+   .footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+   }
+
+   .top{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+   }
+   .top h2{
+    margin-right: 30px;
+    font-size: 2rem;
+   }
+
+.more{
+    color: #50B56F;
+}
+   .btn-archive{
+    font-size: 1rem;
+    padding: 6px 15px;
+    border: 2px solid #54B471;
+    border-radius: 20px;
+    color: #54B471;
+    background-color: #fff;
+
+   }
+
+   .social{
+    display: flex;
+
+
+   }
+
+   .social i{
+    margin-right: 10px;
+   }
