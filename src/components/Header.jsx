@@ -1,5 +1,4 @@
 
-import postData from "../data"
 import { Link } from "react-router-dom"
 import logo from "../images/logo.png"
 export default function Header() {
@@ -27,7 +26,7 @@ export default function Header() {
                     <Link className="right-link" to={"*"}>blog
                         <i className="nf  nf-md-message mts"></i>
                     </Link>
-                    <Link className="right-link" to={"*"}>planer
+                    <Link className="right-link btn1" to={"*"}>planer
                         <i className="nf  nf-md-leaf mts"></i>
 
                     </Link>

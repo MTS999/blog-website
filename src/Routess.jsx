@@ -1,7 +1,6 @@
-import { Link,Route,Routes } from "react-router-dom"
-import PostList from "./components/PostList"
+import { Route,Routes } from "react-router-dom"
 import PostDetail from "./components/PostDetail"
-import Layout from "./components/Layout"
+import Layout from "./components/Layout/Layout"
 export default function Routess(){
     return(
      <Routes>
