@@ -35,7 +35,6 @@ export default function Header() {
                 </div>
 
             </nav>
-            <h1>mts</h1>
         </>
 
 
