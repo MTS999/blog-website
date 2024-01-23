@@ -10,12 +10,19 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 .layout {
-    padding: 45px 45px;
+    /* padding: 45px 45px;2 */
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
+    background-color: #ffffff;
+    padding: 2em;
+    width: 100%;
+    position: fixed;
+}
+header{
+    
 }
 
 .left {
