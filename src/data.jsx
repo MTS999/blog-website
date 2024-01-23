@@ -58,7 +58,7 @@ const postData=[
       "id": 10,
       "title": "optio molestias id quia eum",
       "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"
-    },
+    }]
     // {
     //   "userId": 2,
     //   "id": 11,
@@ -599,7 +599,7 @@ const postData=[
     //   "title": "at nam consequatur ea labore ea harum",
     //   "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
     // }
-  ]
+  
 
 
   export const post1=(pId)=>{

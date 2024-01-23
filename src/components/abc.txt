@@ -1,0 +1,7 @@
+  function handleDelete(id){
+        let newARRAY=[...posts]
+       const filterArray= newARRAY.filter(obj=>obj.id!=id)
+        console.log(filterArray)
+
+        setSeen(filterArray)
+    }

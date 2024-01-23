@@ -109,6 +109,13 @@ a {
 
 /* post-List */
 
+.add-btn{
+    margin-left: auto;
+    padding: 1em 2em;
+    border-radius: 6px;
+    margin-bottom: 3em;
+}
+
 .post-list {
     /* background-color: #b3a7a7; */
     display: flex;
@@ -140,8 +147,67 @@ a {
 
 
 }
+.delete-btn{
+    padding: .25em .5em;
+    font-size: 1rem;
+    margin-top: .5em;
+}
+.modal{
+    display: flex;
+    flex-direction: column;
+}
+
+.model-contant{
+   display: flex;
+   justify-content: center;
+    /* width: 50vw; */
+    background-color: green;
+    margin-top: 4em;
+    /* height: 80vh; */
+    width: 80%;
+    margin: auto;
+    margin-top: 10em;
+    padding: 3rem;
+    border-radius: 10px;
+
+}
+label{
+    font-size: 1.3rem;
+    font-weight: 600;
+    /* margin: .4em; */
+}
+.add-head{
+    font-size: 2rem;
+    padding: .5em;
+}
+
+.add-title, .add-body{
+    padding: .8em;
+    border-radius: 6px;
+    margin: .25em;
+    font-size: 1.2rem;
+    margin-bottom: 1.4em ;
+   
 
 
+}
+input{
+    margin-bottom: 22em ;
+}
+.buutons{
+
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.save,.delete{
+    padding: 1em 2em;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* post detail */
 .post-detail {
     color: #576B71;
     font-size: 20px;
