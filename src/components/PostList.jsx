@@ -1,5 +1,6 @@
 import Modal from "react-modal"
 import React from "react";
+import Main from "./Main"
 import postData from "../data"
 import { Link } from "react-router-dom"
 
@@ -10,6 +11,11 @@ export default function PostList() {
     const [posts, setPosts] = React.useState(postData)
     const [showModel, setShowModel] = React.useState(false)
 
+
+    const [deleteID, setDeleteID] = React.useState(null)
+
+
+    console.log(deleteID)
     const [newPost, setNewPostset] = React.useState({ title: "", body: "" })
 
 
@@ -20,9 +26,14 @@ export default function PostList() {
     }
 
 
-    function handleDelete(id) {
-        const update = posts.filter(post => post.id !== id)
+
+
+    function permanentDelete(){
+
+        console.log("mts")
+         const update = posts.filter(post => post.id !== deleteID)
         setPosts(update)
+
     }
 
 
@@ -36,7 +47,26 @@ export default function PostList() {
                 <p className="">{post.body}</p>
             </Link>
 
-            <button className="delete-btn" onClick={() => handleDelete(post.id)}>delete</button>
+            {deleteID !== post.id &&
+
+
+                <button className="delete-btn" onClick={() => setDeleteID(post.id)}>delete</button>
+            }
+            {deleteID === post.id &&
+
+                <div>
+                    <p className="confirmatoin">Do you wanna delete</p>
+                      <button className="delete-btn" onClick={permanentDelete} >yes</button>
+                    <button className="delete-btn" onClick={()=>setDeleteID(null)} >no</button>
+
+                </div>
+            }
+
+            
+
+            
+
+
         </div>
 
 
@@ -53,10 +83,12 @@ export default function PostList() {
 
         setPosts([...posts, newpost])
         setShowModel(false)
-        setNewPostset({title:"",body:""})
+        setNewPostset({ title: "", body: "" })
     }
     return (
         <>
+
+        <Main/>
             <div className="post-list">
                 <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button>
                 {postList}
@@ -74,7 +106,6 @@ export default function PostList() {
                     <div className="modal">
 
                         <h2 className="add-head">Add new posts</h2>
-                        {/* <div></div> */}
                         <label>
                             Title :
                         </label>
@@ -90,14 +121,14 @@ export default function PostList() {
                             Body :
                         </label>
                         <input
-                                className="add-body"
-                                type="text"
-                                name="body"
-                                id="body"
-                                value={newPost.body}
-                                onChange={(e) => setNewPostset({ ...newPost, body: e.target.value })}
+                            className="add-body"
+                            type="text"
+                            name="body"
+                            id="body"
+                            value={newPost.body}
+                            onChange={(e) => setNewPostset({ ...newPost, body: e.target.value })}
 
-                            />
+                        />
                         <div className="buutons">
 
                             <button className="save" onClick={() => setShowModel(false)}>close</button>

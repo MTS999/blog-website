@@ -6,11 +6,19 @@
     margin: 0;
     padding: 0;
 }
+html{
+    padding: 0;
+    margin: 0;
+}
 body{
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 .layout {
-    /* padding: 45px 45px;2 */
+    /* padding: 45px 45px; */
+    margin: 0;
+    padding: 0;
 }
 
 .navbar {
@@ -20,10 +28,12 @@ body{
     padding: 2em;
     width: 100%;
     position: fixed;
+    top: 0;
     margin-bottom: 2em;
+    width: 100%;
 }
 header{
-    
+    top: 0;
 }
 
 .left {
@@ -36,6 +46,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 34px;
 }
 
 .logo {
@@ -72,7 +83,7 @@ a {
 
 /*Main*/
 .main {
-    margin-top: 60px;
+    margin-top: 130px;
     display: flex;
     flex-wrap: wrap;
     padding: 0px 40px;
@@ -121,16 +132,17 @@ a {
     margin-left: auto;
     padding: 1em 2em;
     border-radius: 6px;
-    margin-bottom: 3em;
-    margin-top: 2em;
+    /* margin-bottom: 3em; */
+    /* margin-top: 2em; */
 }
 
 .post-list {
     /* background-color: #b3a7a7; */
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 100px 300px;
+    padding: 30px 300px 70px;
 }
 .contant{
     /* background-color: #a3b593; */
@@ -145,7 +157,8 @@ a {
     color: #2B2B2B;
 }
 .contant:hover{
-    background-color: #d29e9e;
+    /* background-color: #d29e9e; */
+    background-color: #cee7c4;
 }
 
 .post-title {
@@ -261,14 +274,18 @@ footer{
     
 }
 .footer{
+    width: 100vw;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
-    /* position: fixed; */
-    position: sticky;
+    margin: 0 auto;
+  text-align: center;
+    position: fixed;
+    /* margin-left: 500px; */
     bottom: 0;
+    padding:2em 0 4em 0 ;
   
    }
 
@@ -303,4 +320,21 @@ footer{
 
    .social i{
     margin-right: 10px;
+   }
+
+
+
+
+   /* feDiffuseLightingete */
+
+
+   .delete-btn{
+    background-color: #895050;
+    padding: .5em 1em;
+    margin-right: 6px;
+    border-radius: 6px;
+   }
+   .confirmatoin{
+    margin-top: 1em;
+    color: red;
    }
