@@ -1,5 +1,5 @@
 import Modal from "react-modal"
-import React from "react";
+import React, { useEffect } from "react";
 import postData from "../data"
 import Main from "./Main"
 import { Link } from "react-router-dom"
@@ -8,18 +8,13 @@ import { Link } from "react-router-dom"
 
 export default function PostList() {
     const [seen, setSeen] = React.useState([])
-    const [posts, setPosts] = React.useState(postData)
+    const [posts, setPosts] = React.useState(null)
     const [showModel, setShowModel] = React.useState(false)
-
-
     const [deleteID, setDeleteID] = React.useState(null)
-
-
-    console.log(deleteID)
     const [newPost, setNewPostset] = React.useState({ title: "", body: "" })
 
 
-
+    //   console.log(posts)
     function handleSeen(id) {
         const data = id
         setSeen([...seen, data]);
@@ -28,19 +23,53 @@ export default function PostList() {
 
 
 
-    function permanentDelete(){
+    function permanentDelete() {
 
         console.log("mts")
-         const update = posts.filter(post => post.id !== deleteID)
+        const update = posts.filter(post => post.id !== deleteID)
         setPosts(update)
 
     }
+
+    function handleAdd() {
+        const newpost = {
+            id: posts.length + 1,
+            title: newPost.title,
+            body: newPost.body
+        }
+
+        setPosts([...posts, newpost])
+        setShowModel(false)
+        setNewPostset({ title: "", body: "" })
+    }
+
+
+
+    const fetchData = async () => {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+        const result = await response.json()
+
+        setPosts(result)
+    }
+
+
+    
+    useEffect(() => {
+    
+
+        fetchData()
+    },
+
+        [])
+
+        if (posts===null){
+            return <div><h1>Loading...</h1></div>
+        }
 
 
     const postList = posts.map((post) => (
         <div className="contant" key={post.id} onClick={() => handleSeen(post.id)}>
 
-            {/* <p>{seen.includes(post.id) ? "seen" : "unseen"}</p> */}
             <Link className="title-link" to={`/postDetail/${post.id}`} >
 
                 <h1 className="post-title" >{post.title}</h1>
@@ -55,16 +84,16 @@ export default function PostList() {
             {deleteID === post.id &&
 
                 <div>
-                    {/* <button className="delete-btn"  >yes</button> */}
+                    <p className="confirmation">Do you wanna delete</p>
                     <button className="delete-btn" onClick={permanentDelete} >yes</button>
-                    <button className="delete-btn" onClick={()=>setDeleteID(null)} >no</button>
+                    <button className="delete-btn" onClick={() => setDeleteID(null)} >no</button>
 
                 </div>
             }
 
-            
 
-            
+
+
 
 
         </div>
@@ -74,21 +103,11 @@ export default function PostList() {
 
 
     ))
-    function handleAdd() {
-        const newpost = {
-            id: posts.length + 1,
-            title: newPost.title,
-            body: newPost.body
-        }
 
-        setPosts([...posts, newpost])
-        setShowModel(false)
-        setNewPostset({ title: "", body: "" })
-    }
     return (
         <>
 
-        <Main/>
+            <Main />
 
             <div className="post-list">
                 <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button>
