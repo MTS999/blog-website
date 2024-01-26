@@ -1,7 +1,7 @@
 import Modal from "react-modal"
 import React from "react";
-import Main from "./Main"
 import postData from "../data"
+import Main from "./Main"
 import { Link } from "react-router-dom"
 
 
@@ -55,8 +55,8 @@ export default function PostList() {
             {deleteID === post.id &&
 
                 <div>
-                    <p className="confirmatoin">Do you wanna delete</p>
-                      <button className="delete-btn" onClick={permanentDelete} >yes</button>
+                    {/* <button className="delete-btn"  >yes</button> */}
+                    <button className="delete-btn" onClick={permanentDelete} >yes</button>
                     <button className="delete-btn" onClick={()=>setDeleteID(null)} >no</button>
 
                 </div>
@@ -89,6 +89,7 @@ export default function PostList() {
         <>
 
         <Main/>
+
             <div className="post-list">
                 <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button>
                 {postList}
@@ -106,6 +107,7 @@ export default function PostList() {
                     <div className="modal">
 
                         <h2 className="add-head">Add new posts</h2>
+                        {/* <div></div> */}
                         <label>
                             Title :
                         </label>
