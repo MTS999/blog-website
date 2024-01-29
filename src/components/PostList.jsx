@@ -1,6 +1,6 @@
 import Modal from "react-modal"
+import axios from "axios";
 import React, { useEffect } from "react";
-import postData from "../data"
 import Main from "./Main"
 import { Link } from "react-router-dom"
 
@@ -13,8 +13,6 @@ export default function PostList() {
     const [deleteID, setDeleteID] = React.useState(null)
     const [newPost, setNewPostset] = React.useState({ title: "", body: "" })
 
-
-    //   console.log(posts)
     function handleSeen(id) {
         const data = id
         setSeen([...seen, data]);
@@ -43,28 +41,32 @@ export default function PostList() {
         setNewPostset({ title: "", body: "" })
     }
 
-
-
     const fetchData = async () => {
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts")
-        const result = await response.json()
+        const requestobj = {
+            url: "https://jsonplaceholder.typicode.com/posts",
+            method: "GET"
+        }
 
-        setPosts(result)
+        const result=await axios(requestobj)
+
+        if(result.status===200){
+
+        setPosts(result.data)
+        }
     }
 
-
-    
     useEffect(() => {
-    
+
 
         fetchData()
     },
 
         [])
 
-        if (posts===null){
-            return <div><h1>Loading...</h1></div>
-        }
+
+    if (posts === null) {
+        return <div><h1>Loading...</h1></div>
+    }
 
 
     const postList = posts.map((post) => (
@@ -126,7 +128,6 @@ export default function PostList() {
                     <div className="modal">
 
                         <h2 className="add-head">Add new posts</h2>
-                        {/* <div></div> */}
                         <label>
                             Title :
                         </label>

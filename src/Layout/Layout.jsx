@@ -1,7 +1,6 @@
-// import React from "react"
 import { Outlet } from "react-router-dom"
 import Header from "../components/Header"
-// import postData from "../data"
+import Axious from "../components/Axious"
 import Footer from "../components/Footer"
 export default function Layout() {
 //     const [myArray, setMyArray] = React.useState(postData);
@@ -11,7 +10,7 @@ export default function Layout() {
             <div className="layout">
 
                 <Header />
-             
+                <Axious/>
                 <Outlet />
                 <Footer />
             </div>
