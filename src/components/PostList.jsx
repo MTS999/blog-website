@@ -65,7 +65,8 @@ export default function PostList() {
 
 
     if (posts === null) {
-        return <div><h1>Loading...</h1></div>
+        return <div className="loader"></div>
+        //  <div><h1>Loading...</h1></div>
     }
 
 
