@@ -1,5 +1,5 @@
 
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate,Link } from "react-router-dom"
 import React, { useEffect } from "react"
 // import { post1 } from "../data"
 import axios from "axios"
@@ -7,7 +7,6 @@ export default function PostDetail() {
     const [detail, setDetail] = React.useState(null)
     const params = useParams()
     const navigate = useNavigate()
-    // const post = post1(params.id)
     function back() {
         navigate(-1)
     }
@@ -20,7 +19,7 @@ export default function PostDetail() {
 
         }
         const result = await axios(requestobj)
-        if(result.status===200){
+        if (result.status === 200) {
 
             setDetail(result.data)
         }
@@ -30,7 +29,7 @@ export default function PostDetail() {
         fetchDetail()
     }, [])
 
-    if(detail===null){
+    if (detail === null) {
         return <h1>Loading</h1>
     }
     return (
@@ -42,6 +41,8 @@ export default function PostDetail() {
                 <button className="btn" onClick={back}>back to all posts</button>
                 <h2 className="title">{detail.title}</h2>
                 <p className="detail">{detail.body}</p>
+
+                <Link to={`/postDetail/${detail.id}/edit`}>Edit</Link>
             </div>
         </>
 

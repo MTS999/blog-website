@@ -213,9 +213,9 @@ label{
 
 
 }
-input{
+/* input{
     margin-bottom: 22em ;
-}
+} */
 .buutons{
 
     display: flex;
@@ -359,4 +359,20 @@ footer{
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+
+
+
+  /* form data */
+
+  .form{
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #deb4b4;
+  }
+  input{
+    margin-bottom: 3rem;
   }

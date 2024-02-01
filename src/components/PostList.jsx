@@ -2,7 +2,7 @@ import Modal from "react-modal"
 import axios from "axios";
 import React, { useEffect } from "react";
 import Main from "./Main"
-import { Link } from "react-router-dom"
+import { Link ,useNavigate} from "react-router-dom"
 
 
 
@@ -12,6 +12,7 @@ export default function PostList() {
     const [showModel, setShowModel] = React.useState(false)
     const [deleteID, setDeleteID] = React.useState(null)
     const [newPost, setNewPostset] = React.useState({ title: "", body: "" })
+   const navigate=useNavigate()
 
     function handleSeen(id) {
         const data = id
@@ -23,7 +24,7 @@ export default function PostList() {
 
     function permanentDelete() {
 
-        console.log("mts")
+        // console.log("mts")
         const update = posts.filter(post => post.id !== deleteID)
         setPosts(update)
 
@@ -66,7 +67,6 @@ export default function PostList() {
 
     if (posts === null) {
         return <div className="loader"></div>
-        //  <div><h1>Loading...</h1></div>
     }
 
 
@@ -113,7 +113,9 @@ export default function PostList() {
             <Main />
 
             <div className="post-list">
-                <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button>
+                {/* <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button> */}
+                <button className="add-btn" onClick={() => navigate("/addPost")}>ADD</button>
+                
                 {postList}
             </div>
 
