@@ -42,7 +42,10 @@ export default function PostDetail() {
                 <h2 className="title">{detail.title}</h2>
                 <p className="detail">{detail.body}</p>
 
-                <Link to={`/postDetail/${detail.id}/edit`}>Edit</Link>
+                {/* <Link to={`/postDetail/${detail.id}/edit`}>Edit</Link> */}
+
+                <button onClick={()=>
+                    navigate(`/postDetail/${detail.id}/edit`,{state:detail})} > Edit</button>
             </div>
         </>
 

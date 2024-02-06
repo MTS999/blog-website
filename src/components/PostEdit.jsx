@@ -1,23 +1,25 @@
 import axios from "axios";
 import React, { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 
 
 export default function PostEdit() {
 
     const [addPost, setAddPost] = React.useState(false)
 
-    const [detail, setDetail] = React.useState(null)
 
+    const [error, setError] = React.useState({})
+
+    const location = useLocation()
 
     const [formData, setFormData] = React.useState({
-        title: detail ? detail.title : "",
-        body: detail ? detail.body : "",
-        userId: detail ? detail.userId : ""
+        title: "",
+        body: "",
+        userId: ""
     })
-    console.log("i am here")
 
-    // console.log(formData)
+    console.log(error)
+    // console.log(location.state)
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -29,25 +31,22 @@ export default function PostEdit() {
 
     const params = useParams();
 
-    async function fetchData() {
-        const requestObj = {
-            url: `https://jsonplaceholder.typicode.com/posts/${params.id}`,
-            method: "GET"
-        }
 
-        const result = await axios(requestObj)
-        setDetail(result.data)
-        // console.log(result.data)
-    }
 
     useEffect(() => {
-        if (params.id) {
-
-            fetchData()
+        if (location.state) {
+            setFormData({
+                title: location.state?.title || "",
+                body: location.state?.body || "",
+                userId: location.state?.userId || "",
+            })
         }
         else {
             setAddPost(true)
         }
+
+ 
+
     }, [])
 
     const requestobj = addPost ? 'https://jsonplaceholder.typicode.com/posts' : `https://jsonplaceholder.typicode.com/posts/${params.id}`
@@ -57,25 +56,47 @@ export default function PostEdit() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        fetch(requestobj, {
-            method: methods,
-            body: JSON.stringify({
-                id: params.id,
-                title: formData.title,
-                body: formData.body,
-                userId: formData.userId,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
 
+        const temp_error = {}
+
+
+        if (formData.title.length <= 5) {
+            temp_error.title = " title length is less then 5"
+        }
+        else if (formData.body.length <= 5) {
+            temp_error.title = "body length is less then 5"
+        }
+        else if (!formData.userId) {
+            temp_error.userId = "userId is required";
+        } else if (isNaN(formData.userId)) {
+            temp_error.userId = "userId must be a number";
+        }
+        setError(temp_error)
+
+
+
+        if (Object.keys(temp_error).length === 0) {
+            fetch(requestobj, {
+                method: methods,
+                body: JSON.stringify({
+                    id: params.id,
+                    title: formData.title,
+                    body: formData.body,
+                    userId: formData.userId,
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+
+        }
     }
-    if (  addPost===null && detail === null) {
-        return <h1>Loading</h1>
-    }
+
+
+
+
     return (
         <>
             <div className="main-form">
@@ -101,7 +122,7 @@ export default function PostEdit() {
                             onChange={handleChange}
                         />
                     </div>
-
+                    {error.title && <p>{error.title}</p>}
                     <div>
 
                         <label htmlFor="body">
@@ -122,8 +143,12 @@ export default function PostEdit() {
                         />
                     </div>
                     <div>
+                        {error.body && <p>{error.body}</p>}
 
-                        <label htmlFor="body">
+                    </div>
+                    <div>
+
+                        <label htmlFor="userId1">
                             userId
                         </label>
                     </div>
@@ -140,6 +165,7 @@ export default function PostEdit() {
 
                         />
                     </div>
+                    {error.userId && <p>{error.userId}</p>}
                     <div>
 
                         <button type="submit"> {addPost ? "add" : "update"}</button>
