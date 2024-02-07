@@ -65,10 +65,9 @@ export default function PostList() {
         [])
 
 
-    if (posts === null) {
-        return <div className="loader"></div>
-    }
-
+        if (posts === null) {
+            return <div className="loader"></div>
+        }
 
     const postList = posts.map((post) => (
         <div className="contant" key={post.id} onClick={() => handleSeen(post.id)}>
@@ -94,18 +93,10 @@ export default function PostList() {
                 </div>
             }
 
-
-
-
-
-
         </div>
 
-
-
-
-
     ))
+   
 
     return (
         <>
@@ -113,9 +104,7 @@ export default function PostList() {
             <Main />
 
             <div className="post-list">
-                {/* <button className="add-btn" onClick={() => setShowModel(true)}>ADD</button> */}
-                <button className="add-btn" onClick={() => navigate("/addPost")}>ADD</button>
-                
+             
                 {postList}
             </div>
 

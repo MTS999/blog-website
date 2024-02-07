@@ -45,7 +45,7 @@ export default function PostEdit() {
             setAddPost(true)
         }
 
- 
+
 
     }, [])
 
@@ -64,7 +64,7 @@ export default function PostEdit() {
             temp_error.title = " title length is less then 5"
         }
         else if (formData.body.length <= 5) {
-            temp_error.title = "body length is less then 5"
+            temp_error.body = "body length is less then 5"
         }
         else if (!formData.userId) {
             temp_error.userId = "userId is required";
@@ -76,9 +76,10 @@ export default function PostEdit() {
 
 
         if (Object.keys(temp_error).length === 0) {
-            fetch(requestobj, {
+            axios({
+                url: requestobj,
                 method: methods,
-                body: JSON.stringify({
+                data: JSON.stringify({
                     id: params.id,
                     title: formData.title,
                     body: formData.body,
@@ -88,8 +89,8 @@ export default function PostEdit() {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             })
-                .then((response) => response.json())
-                .then((json) => console.log(json));
+                // .then((response) => response.json())
+                .then((response) => console.log(response));
 
         }
     }
@@ -107,7 +108,7 @@ export default function PostEdit() {
                     <div>
 
                         <label htmlFor="title">
-                            Title:
+                            Title
                         </label>
                     </div>
 
@@ -126,13 +127,13 @@ export default function PostEdit() {
                     <div>
 
                         <label htmlFor="body">
-                            body:
+                            Body
                         </label>
                     </div>
 
                     <div>
 
-                        <input
+                        <textarea
                             className="body1"
                             type="text"
                             name="body"
@@ -164,11 +165,11 @@ export default function PostEdit() {
                             onChange={handleChange}
 
                         />
-                    </div>
+                    </div  >
                     {error.userId && <p>{error.userId}</p>}
-                    <div>
+                    <div className="update-btn">
 
-                        <button type="submit"> {addPost ? "add" : "update"}</button>
+                        <button  className="edit" type="submit"> {addPost ? "add" : "update"}</button>
                     </div>
 
 
