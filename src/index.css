@@ -444,6 +444,35 @@ label{
 
 
 .edit{
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
+}
+
+.nopost{
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+
+.nextpre{
+  display: flex;
+  align-items: center;
+}
+.next{
+  padding: .5em;
+  
+}
+
+.inline{
+  margin: 0 1rem;
+}
+
+
+
+
+.mts111{
+  background-color: #20c617;
+  padding: 3rem;
 }

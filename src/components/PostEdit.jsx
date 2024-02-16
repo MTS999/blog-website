@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react"
 import { useLocation, useParams } from "react-router-dom"
-
+import { TextField } from "@mui/material";
 
 export default function PostEdit() {
 
     const [addPost, setAddPost] = React.useState(false)
-
+    const [loader, setLoader] = React.useState(false)
 
     const [error, setError] = React.useState({})
 
@@ -28,7 +28,37 @@ export default function PostEdit() {
             [name]: value
         })
     }
+    async function callAddApi() {
+        setLoader(true)
+     
+        const addObject={
+            url: requestobj,
+            method: methods,
+            data: JSON.stringify({
+                id: params.id,
+                title: formData.title,
+                body: formData.body,
+                userId: formData.userId,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        }
+            const result=await axios(addObject)
+            console.log(result)
+           
 
+
+        if( addPost && result.status===201){
+            setLoader(false)
+        }
+      else if(result.status===200){
+        setLoader(false)
+
+      }
+        
+
+    }
     const params = useParams();
 
 
@@ -47,7 +77,7 @@ export default function PostEdit() {
 
 
 
-    }, [])
+    }, [location.state])
 
     const requestobj = addPost ? 'https://jsonplaceholder.typicode.com/posts' : `https://jsonplaceholder.typicode.com/posts/${params.id}`
 
@@ -76,22 +106,7 @@ export default function PostEdit() {
 
 
         if (Object.keys(temp_error).length === 0) {
-            axios({
-                url: requestobj,
-                method: methods,
-                data: JSON.stringify({
-                    id: params.id,
-                    title: formData.title,
-                    body: formData.body,
-                    userId: formData.userId,
-                }),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-                // .then((response) => response.json())
-                .then((response) => console.log(response));
-
+            callAddApi()
         }
     }
 
@@ -121,9 +136,10 @@ export default function PostEdit() {
                             id="title"
                             value={formData.title}
                             onChange={handleChange}
+                            required
                         />
                     </div>
-                    {error.title && <p>{error.title}</p>}
+                    {error.title && <p className="error">{error.title}</p>}
                     <div>
 
                         <label htmlFor="body">
@@ -144,7 +160,7 @@ export default function PostEdit() {
                         />
                     </div>
                     <div>
-                        {error.body && <p>{error.body}</p>}
+                        {error.body && <p className="error">{error.body}</p>}
 
                     </div>
                     <div>
@@ -163,18 +179,29 @@ export default function PostEdit() {
                             id="userId"
                             value={formData.userId}
                             onChange={handleChange}
+                            required
 
                         />
                     </div  >
-                    {error.userId && <p>{error.userId}</p>}
+
+
+                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+
+                    {error.userId && <p className="error">{error.userId}</p>}
                     <div className="update-btn">
 
-                        <button  className="edit" type="submit"> {addPost ? "add" : "update"}</button>
+                        <button className="add edit" type="submit"> {addPost ? "add" : "update"}</button>
                     </div>
 
 
                 </form>
             </div>
+            {
+                loader&&(
+                    <div className="loader"></div>
+                )
+            }
+            
         </>
     )
 }

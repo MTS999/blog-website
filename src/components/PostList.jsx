@@ -1,73 +1,96 @@
-import Modal from "react-modal"
 import axios from "axios";
 import React, { useEffect } from "react";
 import Main from "./Main"
-import { Link ,useNavigate} from "react-router-dom"
+import { Link } from "react-router-dom"
+
+import { Button } from "@mui/material";
 
 
 
 export default function PostList() {
     const [seen, setSeen] = React.useState([])
-    const [posts, setPosts] = React.useState(null)
-    const [showModel, setShowModel] = React.useState(false)
+    const [posts, setPosts] = React.useState([])
     const [deleteID, setDeleteID] = React.useState(null)
-    const [newPost, setNewPostset] = React.useState({ title: "", body: "" })
-   const navigate=useNavigate()
+    const [start, setStart] = React.useState(0)
+    const [totalpost, setTotalPost] = React.useState(0)
+    const [loader, setLoder] = React.useState(false)
+    const limit = 10;
 
+    // seen function
     function handleSeen(id) {
         const data = id
         setSeen([...seen, data]);
     }
 
+    // delete  Post functions
+    async function permanentDelete() {
+        setLoder(true)
 
+        const deleteObject = {
+            url: `https://jsonplaceholder.typicode.com/posts/${deleteID}`,
+            method: "DELETE"
+        }
 
+        const result = await axios(deleteObject)
 
-    function permanentDelete() {
+        if (result.status === 200) {
+            deletePost()
+            console.log("mts")
+            setLoder(false)
+        }
+    }
+    function deletePost() {
 
-        // console.log("mts")
         const update = posts.filter(post => post.id !== deleteID)
         setPosts(update)
 
     }
-
-    function handleAdd() {
-        const newpost = {
-            id: posts.length + 1,
-            title: newPost.title,
-            body: newPost.body
-        }
-
-        setPosts([...posts, newpost])
-        setShowModel(false)
-        setNewPostset({ title: "", body: "" })
-    }
+        
+//    fetchData from api
 
     const fetchData = async () => {
+        setLoder(true)
+        const requestobj = {
+            // url: "https://jsonplaceholder.typicode.com/posts",
+            // url: "https://jsonplaceholder.typicode.com/posts?_limit=10",
+            url: `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`,
+            method: "GET"
+        }
+
+        const result = await axios(requestobj)
+
+        if (result.status === 200) {
+            setPosts(result.data);
+            setLoder(false)
+        }
+    }
+
+    const countLength = async () => {
+        setLoder(true)
         const requestobj = {
             url: "https://jsonplaceholder.typicode.com/posts",
             method: "GET"
         }
 
-        const result=await axios(requestobj)
+        const result = await axios(requestobj)
 
-        if(result.status===200){
+        if (result.status === 200) {
+            setTotalPost(result.data.length)
 
-        setPosts(result.data)
+
         }
     }
 
     useEffect(() => {
+        fetchData();
+    }, [start]);
 
 
-        fetchData()
-    },
+    useEffect(() => {
+        countLength()
+    }, [])
 
-        [])
 
-
-        if (posts === null) {
-            return <div className="loader"></div>
-        }
 
     const postList = posts.map((post) => (
         <div className="contant" key={post.id} onClick={() => handleSeen(post.id)}>
@@ -78,11 +101,13 @@ export default function PostList() {
                 <p className="">{post.body}</p>
             </Link>
 
+            {/* delete button */}
+
             {deleteID !== post.id &&
-
-
                 <button className="delete-btn" onClick={() => setDeleteID(post.id)}>delete</button>
             }
+{/* delete confermation */}
+
             {deleteID === post.id &&
 
                 <div>
@@ -92,72 +117,46 @@ export default function PostList() {
 
                 </div>
             }
-
+            {
+                loader && (
+                    <div className="loader"></div>
+                )
+            }
         </div>
 
     ))
-   
+
 
     return (
         <>
-
             <Main />
-
             <div className="post-list">
-             
                 {postList}
+  
+                {/* previous and  next buttons */}
+
+                <div className="nextpre">
+
+                    <button
+                        className="next"
+                        onClick={() => setStart(pre => pre - 5)}
+                        disabled={start === 0 ? true : false}
+                    >Previous</button>
+
+
+                    <p className="inline"> {start} to {start + limit}</p>
+
+                    {posts.length > 0 &&
+
+                        <button
+                            className="next"
+                            onClick={() =>  setStart(pre => pre + 10)}
+                            disabled={start + limit >= totalpost ? true : false}
+                        >Next </button>
+                    }
+                </div>
             </div>
-
-
-            {
-                <Modal
-                    isOpen={showModel}
-                    onRequestClose={() => setShowModel(false)}
-                    contentLabel="Add New Post Modal"
-                    ariaHideApp={false}
-                    className="model-contant"
-                >
-                    <div className="modal">
-
-                        <h2 className="add-head">Add new posts</h2>
-                        <label>
-                            Title :
-                        </label>
-                        <input
-                            className="add-title"
-                            type="text"
-                            name="title"
-                            id="title"
-                            value={newPost.title}
-                            onChange={(e) => setNewPostset({ ...newPost, title: e.target.value })}
-                        />
-                        <label>
-                            Body :
-                        </label>
-                        <input
-                            className="add-body"
-                            type="text"
-                            name="body"
-                            id="body"
-                            value={newPost.body}
-                            onChange={(e) => setNewPostset({ ...newPost, body: e.target.value })}
-
-                        />
-                        <div className="buutons">
-
-                            <button className="save" onClick={() => setShowModel(false)}>close</button>
-                            <button className="delete" onClick={handleAdd}>add</button>
-                        </div>
-
-                    </div>
-                </Modal>
-
-
-            }
         </>
-
-
-
     )
 }
 
